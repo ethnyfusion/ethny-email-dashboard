@@ -7,6 +7,7 @@ import {
   Preview,
   Section,
   Tailwind,
+  Text,
 } from "@react-email/components";
 import type { ReactNode } from "react";
 
@@ -33,15 +34,27 @@ export function EthnyEmailLayout({
               margin: "32px auto",
               padding: "24px",
               backgroundColor: "#ffffff",
-              borderRadius: "16px",
+              borderRadius: "18px",
               border: "1px solid #e7efdf",
+              boxShadow: "0 16px 40px rgba(31, 94, 59, 0.08)",
             }}
           >
-            <Section style={{ marginBottom: "24px" }}>
+            <Section
+              style={{
+                marginBottom: "24px",
+                padding: "18px 20px",
+                borderRadius: "16px",
+                border: "1px solid #e3efd8",
+                background: "linear-gradient(135deg, #f8fcf4 0%, #ffffff 100%)",
+              }}
+            >
+              <Text style={{ margin: 0, fontSize: "12px", fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase", color: "#2f7a4f" }}>
+                Ethny
+              </Text>
               <Heading
                 as="h1"
                 style={{
-                  margin: 0,
+                  margin: "8px 0 0",
                   fontSize: "28px",
                   lineHeight: 1.2,
                   color: "#173d29",

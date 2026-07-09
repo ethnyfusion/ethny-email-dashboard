@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { BrandMark } from "@/components/BrandMark";
 import { CampaignCard } from "@/components/CampaignCard";
 import { EmailPreviewFrame } from "@/components/EmailPreviewFrame";
 import { emailCampaigns } from "@/lib/email-campaigns";
@@ -71,29 +72,32 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
   }
 
   return (
-    <main className="min-h-screen bg-[linear-gradient(135deg,#f7fbf4_0%,#f1f6ea_100%)] px-4 py-10 text-stone-900 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[linear-gradient(135deg,var(--surface-elevated)_0%,var(--background)_100%)] px-4 py-10 text-[color:var(--foreground)] sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-8">
-        <header className="rounded-[32px] border border-emerald-100 bg-white/90 p-8 shadow-sm backdrop-blur">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.26em] text-emerald-700">Ethny Email Dashboard</p>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
-                Design, preview, and test your next Ethny campaign.
-              </h1>
-              <p className="mt-3 max-w-2xl text-base text-stone-600">
-                Build polished email experiences with shared variables and send a test email through Resend.
-              </p>
+        <header className="rounded-[32px] border border-[color:var(--border)] bg-[linear-gradient(135deg,var(--surface)_0%,var(--brand-soft)_100%)] p-8 shadow-[0_20px_50px_rgba(31,94,59,0.11)] backdrop-blur">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-col gap-4">
+              <BrandMark className="w-fit rounded-full border border-[color:var(--brand-soft)] bg-[color:var(--surface)]/95 p-3 shadow-sm" />
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.26em] text-[color:var(--brand)]">Ethny Email Dashboard</p>
+                <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-4xl">
+                  Refine every campaign with a stronger, brand-led experience.
+                </h1>
+                <p className="mt-3 max-w-2xl text-base text-[color:var(--foreground-muted)]">
+                  Build polished email experiences with shared variables, sharper visuals, and a clearly visible Ethny identity.
+                </p>
+              </div>
             </div>
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-              V1 • Secure, Vercel-ready, no secrets in the codebase.
+            <div className="rounded-2xl border border-[color:var(--brand-soft)] bg-[color:var(--surface)]/90 px-4 py-3 text-sm font-medium text-[color:var(--brand-strong)] shadow-sm">
+              V1 • Brand-ready, fast to preview, and easy to refine.
             </div>
           </div>
         </header>
 
         <section className="grid gap-8 lg:grid-cols-[360px_minmax(0,1fr)]">
           <aside className="space-y-6">
-            <div className="rounded-[24px] border border-stone-200 bg-white p-5 shadow-sm">
-              <h2 className="text-lg font-semibold text-stone-900">Campaigns</h2>
+            <div className="rounded-[24px] border border-[color:var(--border)] bg-[color:var(--surface)] p-5 shadow-sm">
+              <h2 className="text-lg font-semibold text-[color:var(--foreground)]">Campaigns</h2>
               <div className="mt-4 space-y-3">
                 {emailCampaigns.map((campaign) => (
                   <CampaignCard
@@ -106,8 +110,8 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
               </div>
             </div>
 
-            <div className="rounded-[24px] border border-stone-200 bg-white p-5 shadow-sm">
-              <h2 className="text-lg font-semibold text-stone-900">Variables</h2>
+            <div className="rounded-[24px] border border-[color:var(--border)] bg-[color:var(--surface)] p-5 shadow-sm">
+              <h2 className="text-lg font-semibold text-[color:var(--foreground)]">Variables</h2>
               <div className="mt-4 space-y-3">
                 {[
                   { key: "firstName", label: "First name" },
@@ -115,10 +119,10 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
                   { key: "bookingLink", label: "Booking link" },
                   { key: "unsubscribeLink", label: "Unsubscribe link" },
                 ].map((field) => (
-                  <label key={field.key} className="block text-sm text-stone-700">
-                    <span className="mb-1 block font-medium">{field.label}</span>
+                  <label key={field.key} className="block text-sm text-[color:var(--foreground-muted)]">
+                    <span className="mb-1 block font-medium text-[color:var(--foreground)]">{field.label}</span>
                     <input
-                      className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-0 focus:border-emerald-500"
+                      className="w-full rounded-xl border border-[color:var(--border)] bg-[color:var(--surface-elevated)] px-3 py-2 text-sm text-[color:var(--foreground)] outline-none ring-0 transition focus:border-[color:var(--brand)]"
                       value={variables[field.key as keyof CampaignVariables]}
                       onChange={(event) =>
                         setVariables((current) => ({
@@ -132,8 +136,8 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
               </div>
             </div>
 
-            <div className="rounded-[24px] border border-stone-200 bg-white p-5 shadow-sm">
-              <h2 className="text-lg font-semibold text-stone-900">Template content</h2>
+            <div className="rounded-[24px] border border-[color:var(--border)] bg-[color:var(--surface)] p-5 shadow-sm">
+              <h2 className="text-lg font-semibold text-[color:var(--foreground)]">Template content</h2>
               <div className="mt-4 space-y-3">
                 {[
                   { key: "previewText", label: "Preview text" },
@@ -144,10 +148,10 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
                   { key: "body", label: "Body" },
                   { key: "ctaLabel", label: "Button label" },
                 ].map((field) => (
-                  <label key={field.key} className="block text-sm text-stone-700">
-                    <span className="mb-1 block font-medium">{field.label}</span>
+                  <label key={field.key} className="block text-sm text-[color:var(--foreground-muted)]">
+                    <span className="mb-1 block font-medium text-[color:var(--foreground)]">{field.label}</span>
                     <textarea
-                      className="min-h-24 w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-0 focus:border-emerald-500"
+                      className="min-h-24 w-full rounded-xl border border-[color:var(--border)] bg-[color:var(--surface-elevated)] px-3 py-2 text-sm text-[color:var(--foreground)] outline-none ring-0 transition focus:border-[color:var(--brand)]"
                       value={content[field.key as keyof CampaignTemplateContent]}
                       onChange={(event) =>
                         setContent((current) => ({
@@ -163,23 +167,23 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
           </aside>
 
           <section className="space-y-6">
-            <div className="rounded-[24px] border border-stone-200 bg-white p-5 shadow-sm">
+            <div className="rounded-[24px] border border-[color:var(--border)] bg-[color:var(--surface)] p-5 shadow-sm">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">{selectedCampaign.category}</p>
-                  <h2 className="mt-2 text-2xl font-semibold text-stone-900">{selectedCampaign.name}</h2>
-                  <p className="mt-2 text-sm text-stone-600">{selectedCampaign.subject}</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[color:var(--brand)]">{selectedCampaign.category}</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-[color:var(--foreground)]">{selectedCampaign.name}</h2>
+                  <p className="mt-2 text-sm text-[color:var(--foreground-muted)]">{selectedCampaign.subject}</p>
                 </div>
                 <button
                   type="button"
                   onClick={handleSendTest}
-                  className="rounded-full bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-800"
+                  className="rounded-full bg-[color:var(--brand)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[color:var(--brand-strong)]"
                 >
                   {status === "sending" ? "Sending…" : "Send test"}
                 </button>
               </div>
               {message ? (
-                <p className={`mt-4 text-sm ${status === "error" ? "text-red-600" : "text-emerald-700"}`}>
+                <p className={`mt-4 text-sm ${status === "error" ? "text-red-600" : "text-[color:var(--brand)]"}`}>
                   {message}
                 </p>
               ) : null}
