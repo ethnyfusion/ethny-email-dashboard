@@ -1,5 +1,6 @@
 import { render } from "@react-email/render";
 import { getEmailCampaign } from "@/lib/email-campaigns";
+import { getDefaultCampaignContent, type CampaignTemplateContent } from "@/lib/email-content";
 import {
   resolveCampaignVariables,
   type CampaignVariables,
@@ -14,6 +15,7 @@ export interface RenderedCampaign {
 export async function renderCampaignHtml(
   campaignId: string,
   variables?: Partial<CampaignVariables>,
+  content?: CampaignTemplateContent,
 ): Promise<RenderedCampaign> {
   const campaign = getEmailCampaign(campaignId);
 
@@ -22,7 +24,8 @@ export async function renderCampaignHtml(
   }
 
   const resolvedVariables = resolveCampaignVariables(variables);
-  const html = await render(campaign.component(resolvedVariables));
+  const resolvedContent = content ?? getDefaultCampaignContent(campaignId);
+  const html = await render(campaign.component(resolvedVariables, resolvedContent));
 
   return {
     html,

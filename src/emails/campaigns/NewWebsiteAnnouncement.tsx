@@ -4,27 +4,29 @@ import { EmailHeader } from "@/emails/components/EmailHeader";
 import { EthnyButton } from "@/emails/components/EthnyButton";
 import { EthnySignature } from "@/emails/components/EthnySignature";
 import { EthnyEmailLayout } from "@/emails/layouts/EthnyEmailLayout";
+import type { CampaignTemplateContent } from "@/lib/email-content";
 import type { CampaignVariables } from "@/lib/email-variables";
 
 interface Props {
   variables: CampaignVariables;
+  content: CampaignTemplateContent;
 }
 
-export function PrivateChefExperience({ variables }: Props) {
+export function NewWebsiteAnnouncement({ variables, content }: Props) {
   return (
-    <EthnyEmailLayout previewText="A private chef experience, crafted for you." title="A private chef experience, crafted for you">
-      <EmailHeader title="Private chef experience" subtitle="Luxury dining, arranged with care." />
+    <EthnyEmailLayout previewText={content.previewText} title={content.title}>
+      <EmailHeader title={content.headerTitle} subtitle={content.headerSubtitle} />
       <Section>
         <Text style={{ margin: "0 0 12px", fontSize: "16px", lineHeight: 1.6, color: "#2d3f35" }}>
-          Hello {variables.firstName},
+          {content.intro.replace("{firstName}", variables.firstName)}
         </Text>
         <Text style={{ margin: "0 0 12px", fontSize: "16px", lineHeight: 1.6, color: "#2d3f35" }}>
-          Discover how a private chef experience can bring exceptional service, taste, and atmosphere to your next gathering.
+          {content.body.split(". ")[0] + "."}
         </Text>
         <Text style={{ margin: "0 0 20px", fontSize: "16px", lineHeight: 1.6, color: "#2d3f35" }}>
-          Tailored for intimate dinners, celebrations, or elevated hosting moments.
+          {content.body.split(". ")[1] ?? content.body}
         </Text>
-        <EthnyButton href={variables.bookingLink} label="Explore private chef options" />
+        <EthnyButton href={variables.websiteLink} label={content.ctaLabel} />
         <EthnySignature />
       </Section>
       <EmailFooter unsubscribeLink={variables.unsubscribeLink} />

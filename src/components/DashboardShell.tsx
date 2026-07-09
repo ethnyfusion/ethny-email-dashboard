@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { CampaignCard } from "@/components/CampaignCard";
 import { EmailPreviewFrame } from "@/components/EmailPreviewFrame";
-import { emailCampaigns, type EmailCampaign } from "@/lib/email-campaigns";
+import { emailCampaigns } from "@/lib/email-campaigns";
+import { getDefaultCampaignContent, type CampaignTemplateContent } from "@/lib/email-content";
 import { renderCampaignHtml } from "@/lib/email-renderer";
 import type { CampaignVariables } from "@/lib/email-variables";
 
@@ -22,6 +23,7 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
   });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [content, setContent] = useState<CampaignTemplateContent>(getDefaultCampaignContent(emailCampaigns[0].id));
 
   const selectedCampaign = useMemo(
     () => emailCampaigns.find((campaign) => campaign.id === selectedCampaignId) ?? emailCampaigns[0],
@@ -29,11 +31,15 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
   );
 
   useEffect(() => {
+    setContent(getDefaultCampaignContent(selectedCampaign.id));
+  }, [selectedCampaign.id]);
+
+  useEffect(() => {
     void (async () => {
-      const rendered = await renderCampaignHtml(selectedCampaign.id, variables);
+      const rendered = await renderCampaignHtml(selectedCampaign.id, variables, content);
       setPreviewHtml(rendered.html);
     })();
-  }, [selectedCampaign.id, variables]);
+  }, [selectedCampaign.id, variables, content]);
 
   async function handleSendTest() {
     setStatus("sending");
@@ -46,6 +52,7 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
         body: JSON.stringify({
           campaignId: selectedCampaign.id,
           variables,
+          content,
         }),
       });
 
@@ -115,6 +122,35 @@ export function DashboardShell({ initialCampaignId }: DashboardShellProps) {
                       value={variables[field.key as keyof CampaignVariables]}
                       onChange={(event) =>
                         setVariables((current) => ({
+                          ...current,
+                          [field.key]: event.target.value,
+                        }))
+                      }
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[24px] border border-stone-200 bg-white p-5 shadow-sm">
+              <h2 className="text-lg font-semibold text-stone-900">Template content</h2>
+              <div className="mt-4 space-y-3">
+                {[
+                  { key: "previewText", label: "Preview text" },
+                  { key: "title", label: "Title" },
+                  { key: "headerTitle", label: "Header title" },
+                  { key: "headerSubtitle", label: "Header subtitle" },
+                  { key: "intro", label: "Greeting" },
+                  { key: "body", label: "Body" },
+                  { key: "ctaLabel", label: "Button label" },
+                ].map((field) => (
+                  <label key={field.key} className="block text-sm text-stone-700">
+                    <span className="mb-1 block font-medium">{field.label}</span>
+                    <textarea
+                      className="min-h-24 w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-0 focus:border-emerald-500"
+                      value={content[field.key as keyof CampaignTemplateContent]}
+                      onChange={(event) =>
+                        setContent((current) => ({
                           ...current,
                           [field.key]: event.target.value,
                         }))

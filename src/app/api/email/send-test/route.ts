@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
+import type { CampaignTemplateContent } from "@/lib/email-content";
 import { renderCampaignHtml } from "@/lib/email-renderer";
 import { getResendClient, getResendConfig } from "@/lib/resend";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { campaignId, variables } = body as {
+    const { campaignId, variables, content } = body as {
       campaignId?: string;
       variables?: Record<string, string>;
+      content?: CampaignTemplateContent;
     };
 
     if (!campaignId) {
@@ -26,7 +28,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const rendered = await renderCampaignHtml(campaignId, variables);
+    const rendered = await renderCampaignHtml(campaignId, variables, content);
 
     const result = await resend.emails.send({
       from,

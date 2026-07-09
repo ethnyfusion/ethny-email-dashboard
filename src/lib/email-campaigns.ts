@@ -1,8 +1,10 @@
-import { createElement, type ReactElement } from "react";
+import { createElement, type ComponentType, type ReactElement } from "react";
 import { ClientReactivationEmail1 } from "@/emails/campaigns/ClientReactivationEmail1";
 import { EventCateringEmail } from "@/emails/campaigns/EventCateringEmail";
 import { NewWebsiteAnnouncement } from "@/emails/campaigns/NewWebsiteAnnouncement";
 import { PrivateChefExperience } from "@/emails/campaigns/PrivateChefExperience";
+import type { CampaignTemplateContent } from "@/lib/email-content";
+import { getDefaultCampaignContent } from "@/lib/email-content";
 import type { CampaignVariables } from "@/lib/email-variables";
 
 export type CampaignId =
@@ -11,6 +13,11 @@ export type CampaignId =
   | "private-chef-experience"
   | "event-catering";
 
+interface CampaignComponentProps {
+  variables: CampaignVariables;
+  content: CampaignTemplateContent;
+}
+
 export interface EmailCampaign {
   id: CampaignId;
   name: string;
@@ -18,8 +25,14 @@ export interface EmailCampaign {
   subject: string;
   previewText: string;
   category: string;
-  component: (variables: CampaignVariables) => ReactElement;
+  component: (variables: CampaignVariables, content?: CampaignTemplateContent) => ReactElement;
 }
+
+const createCampaignElement = (
+  Component: ComponentType<CampaignComponentProps>,
+  variables: CampaignVariables,
+  content?: CampaignTemplateContent,
+) => createElement(Component, { variables, content: content ?? getDefaultCampaignContent("new-website-announcement") });
 
 export const emailCampaigns: EmailCampaign[] = [
   {
@@ -29,7 +42,8 @@ export const emailCampaigns: EmailCampaign[] = [
     subject: "A new Ethny experience is live",
     previewText: "Discover the new Ethny website and the elevated experience behind it.",
     category: "Launch",
-    component: (variables) => createElement(NewWebsiteAnnouncement, { variables }),
+    component: (variables, content) =>
+      createCampaignElement(NewWebsiteAnnouncement, variables, content),
   },
   {
     id: "client-reactivation",
@@ -38,7 +52,8 @@ export const emailCampaigns: EmailCampaign[] = [
     subject: "We would love to welcome you back",
     previewText: "Come back for a tailored experience designed around your preferences.",
     category: "Reactivation",
-    component: (variables) => createElement(ClientReactivationEmail1, { variables }),
+    component: (variables, content) =>
+      createCampaignElement(ClientReactivationEmail1, variables, content),
   },
   {
     id: "private-chef-experience",
@@ -47,7 +62,8 @@ export const emailCampaigns: EmailCampaign[] = [
     subject: "A private chef experience, crafted for you",
     previewText: "Bring a memorable chef-led moment to your next occasion.",
     category: "Luxury",
-    component: (variables) => createElement(PrivateChefExperience, { variables }),
+    component: (variables, content) =>
+      createCampaignElement(PrivateChefExperience, variables, content),
   },
   {
     id: "event-catering",
@@ -56,7 +72,8 @@ export const emailCampaigns: EmailCampaign[] = [
     subject: "Elevated catering for your next event",
     previewText: "Let Ethny bring culinary excellence to your next gathering.",
     category: "Events",
-    component: (variables) => createElement(EventCateringEmail, { variables }),
+    component: (variables, content) =>
+      createCampaignElement(EventCateringEmail, variables, content),
   },
 ];
 
