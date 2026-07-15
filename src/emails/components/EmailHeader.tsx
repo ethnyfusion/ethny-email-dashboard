@@ -1,5 +1,3 @@
-import { Img, Section, Text } from "@react-email/components";
-
 const logoUrl =
   "https://raw.githubusercontent.com/ethnyfusion/ethny-fusion-v2/4550affa0662a32f0b278a771316cac50144600a/public/logo/ethny-logo.svg";
 
@@ -10,7 +8,7 @@ interface EmailHeaderProps {
 
 export function EmailHeader({ title, category }: EmailHeaderProps) {
   return (
-    <Section
+    <div
       style={{
         marginBottom: "24px",
         padding: "18px 20px",
@@ -33,17 +31,17 @@ export function EmailHeader({ title, category }: EmailHeaderProps) {
             boxShadow: "0 10px 24px rgba(31, 94, 59, 0.1)",
           }}
         >
-          <Img src={logoUrl} alt="Ethny" width="34" height="34" />
+          <img src={logoUrl} alt="Ethny" width="34" height="34" />
         </div>
         <div>
-          <Text style={{ margin: 0, fontSize: "12px", fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase", color: "#2f5d50" }}>
+          <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase", color: "#2f5d50" }}>
             {category}
-          </Text>
-          <Text style={{ margin: "6px 0 0", fontSize: "17px", fontWeight: 700, color: "#173d29" }}>
+          </p>
+          <p style={{ margin: "6px 0 0", fontSize: "17px", fontWeight: 700, color: "#173d29" }}>
             {title}
-          </Text>
+          </p>
         </div>
       </div>
-    </Section>
+    </div>
   );
 }
