@@ -1,24 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f8ee;
-  --surface: #ffffff;
-  --surface-elevated: #f7fbf2;
-  --surface-muted: #edf4e7;
-  --foreground: #16231a;
-  --foreground-muted: #5f6d61;
-  --border: #dfe9d9;
-  --brand: #2f7a4f;
-  --brand-strong: #1f5e3b;
-  --brand-soft: #e7f4ea;
-  --accent: #7eb06d;
+  --background: #f7f4ee;
+  --surface: #fffaf2;
+  --surface-muted: #f1ece2;
+  --surface-elevated: #f1ece2;
+  --foreground: #2a2a2a;
+  --foreground-muted: #5f5d56;
+  --border: rgba(42, 42, 42, 0.16);
+
+  --brand: #2f5d50;
+  --brand-strong: #23463c;
+  --brand-soft: #e4ebe7;
+  --brand-secondary: #4e7b6d;
+  --accent: #4e7b6d;
+
+  --shadow-soft: 0 24px 80px rgba(28, 59, 52, 0.12);
+  --radius-soft: 10px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
 }
 
 * {
@@ -35,10 +39,19 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(126, 176, 109, 0.17), transparent 28%),
+    radial-gradient(circle at 16px 16px, rgba(47, 93, 80, 0.11) 1px, transparent 1px),
+    linear-gradient(120deg, transparent 0 46%, rgba(78, 123, 109, 0.08) 46% 47%, transparent 47% 100%),
     var(--background);
+  background-size: 36px 36px, 240px 240px, auto;
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-title), Georgia, serif;
+  color: var(--brand-strong);
 }
 
 ::selection {

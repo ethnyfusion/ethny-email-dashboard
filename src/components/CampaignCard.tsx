@@ -32,7 +32,7 @@ export function CampaignCard({ campaign, selected, onSelect }: CampaignCardProps
               : "bg-[color:var(--surface-muted)] text-[color:var(--foreground-muted)]"
           }`}
         >
-          {selected ? "Active" : "Open"}
+          {selected ? "Actif" : "Ouvrir"}
         </span>
       </div>
     </button>

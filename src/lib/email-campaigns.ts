@@ -22,58 +22,49 @@ export interface EmailCampaign {
   id: CampaignId;
   name: string;
   description: string;
-  subject: string;
-  previewText: string;
   category: string;
   component: (variables: CampaignVariables, content?: CampaignTemplateContent) => ReactElement;
 }
 
 const createCampaignElement = (
+  campaignId: CampaignId,
   Component: ComponentType<CampaignComponentProps>,
   variables: CampaignVariables,
   content?: CampaignTemplateContent,
-) => createElement(Component, { variables, content: content ?? getDefaultCampaignContent("new-website-announcement") });
+) => createElement(Component, { variables, content: content ?? getDefaultCampaignContent(campaignId) });
 
 export const emailCampaigns: EmailCampaign[] = [
   {
     id: "new-website-announcement",
-    name: "New Website Announcement",
-    description: "Launch a refined introduction to the new Ethny experience.",
-    subject: "A new Ethny experience is live",
-    previewText: "Discover the new Ethny website and the elevated experience behind it.",
-    category: "Launch",
+    name: "Lancement / annonce",
+    description: "Présenter une nouveauté Ethny avec une tonalité premium.",
+    category: "Annonce",
     component: (variables, content) =>
-      createCampaignElement(NewWebsiteAnnouncement, variables, content),
+      createCampaignElement("new-website-announcement", NewWebsiteAnnouncement, variables, content),
   },
   {
     id: "client-reactivation",
-    name: "Client Reactivation",
-    description: "Re-engage prior clients with a personal invitation to reconnect.",
-    subject: "We would love to welcome you back",
-    previewText: "Come back for a tailored experience designed around your preferences.",
-    category: "Reactivation",
+    name: "Réactivation clients",
+    description: "Relancer des anciens clients avec un angle personnalisé.",
+    category: "Réactivation",
     component: (variables, content) =>
-      createCampaignElement(ClientReactivationEmail1, variables, content),
+      createCampaignElement("client-reactivation", ClientReactivationEmail1, variables, content),
   },
   {
     id: "private-chef-experience",
-    name: "Private Chef Experience",
-    description: "Invite guests into a premium private chef journey.",
-    subject: "A private chef experience, crafted for you",
-    previewText: "Bring a memorable chef-led moment to your next occasion.",
-    category: "Luxury",
+    name: "Demande d’avis",
+    description: "Collecter des retours après une prestation.",
+    category: "Avis",
     component: (variables, content) =>
-      createCampaignElement(PrivateChefExperience, variables, content),
+      createCampaignElement("private-chef-experience", PrivateChefExperience, variables, content),
   },
   {
     id: "event-catering",
-    name: "Event Catering",
-    description: "Present a polished option for premium event catering.",
-    subject: "Elevated catering for your next event",
-    previewText: "Let Ethny bring culinary excellence to your next gathering.",
-    category: "Events",
+    name: "Storytelling premium",
+    description: "Partager une actualité éditoriale autour du chef.",
+    category: "Storytelling",
     component: (variables, content) =>
-      createCampaignElement(EventCateringEmail, variables, content),
+      createCampaignElement("event-catering", EventCateringEmail, variables, content),
   },
 ];
 

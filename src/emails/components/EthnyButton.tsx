@@ -10,7 +10,7 @@ export function EthnyButton({ href, label }: EthnyButtonProps) {
     <Button
       href={href}
       style={{
-        backgroundColor: "#1f6b46",
+        backgroundColor: "#2f5d50",
         borderRadius: "999px",
         color: "#ffffff",
         fontSize: "15px",

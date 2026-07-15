@@ -1,7 +1,5 @@
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="200" height="200" rx="48" fill="#F4F8EE"/>
-  <path d="M146 58.5C139.2 44.1 124.1 34.8 107.3 34.8C82.5 34.8 62.5 54.8 62.5 79.6C62.5 94.3 68.5 107.4 79.4 116.4C84.4 120.2 90.4 122.3 96.7 122.3C117.7 122.3 135.7 104.3 135.7 83.3C135.7 76.7 134.2 70.6 131.6 65.2C129.8 61.5 128.1 59.8 124.5 58.5H146Z" fill="#2F7A4F"/>
-  <path d="M118.6 83.2C118.6 93 110.5 101.1 100.7 101.1C90.9 101.1 82.8 93 82.8 83.2C82.8 73.4 90.9 65.3 100.7 65.3C110.5 65.3 118.6 73.4 118.6 83.2Z" fill="#7EB06D"/>
-  <path d="M92 138.8C111.7 138.8 127.7 122.8 127.7 103.1C127.7 83.4 111.7 67.4 92 67.4C72.3 67.4 56.3 83.4 56.3 103.1C56.3 122.8 72.3 138.8 92 138.8Z" stroke="#1F5E3B" stroke-width="10" stroke-linecap="round"/>
-  <path d="M145.1 150.9C154 150.9 161.2 143.7 161.2 134.8C161.2 126 154 118.8 145.1 118.8C136.2 118.8 129 126 129 134.8C129 143.7 136.2 150.9 145.1 150.9Z" fill="#1F5E3B"/>
+<svg width="164" height="44" viewBox="0 0 164 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ethny Nomad Cuisine">
+  <rect width="164" height="44" rx="0" fill="#F7F4EE"/>
+  <text x="18" y="28" fill="#1C3B34" font-family="Bricolage Grotesque, Arial, sans-serif" font-size="23" letter-spacing="0">ethny</text>
+  <text x="91" y="27" fill="#285447" font-family="Alegreya Sans, Arial, sans-serif" font-size="8" letter-spacing="2.4">NOMAD CUISINE</text>
 </svg>

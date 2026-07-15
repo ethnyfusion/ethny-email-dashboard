@@ -1,10 +1,10 @@
 import { Text } from "@react-email/components";
 
 interface EthnySignatureProps {
-  name?: string;
+  name: string;
 }
 
-export function EthnySignature({ name = "The Ethny Team" }: EthnySignatureProps) {
+export function EthnySignature({ name }: EthnySignatureProps) {
   return (
     <div>
       <Text style={{ margin: "20px 0 4px", fontSize: "15px", color: "#173d29" }}>

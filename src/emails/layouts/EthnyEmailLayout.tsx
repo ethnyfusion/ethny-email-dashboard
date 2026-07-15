@@ -27,16 +27,16 @@ export function EthnyEmailLayout({
       <Head />
       <Preview>{previewText}</Preview>
       <Tailwind>
-        <Body style={{ margin: 0, padding: 0, backgroundColor: "#f4f7f2" }}>
+        <Body style={{ margin: 0, padding: 0, backgroundColor: "#f7f4ee" }}>
           <Container
             style={{
               maxWidth: "640px",
               margin: "32px auto",
               padding: "24px",
-              backgroundColor: "#ffffff",
+              backgroundColor: "#fffaf2",
               borderRadius: "18px",
-              border: "1px solid #e7efdf",
-              boxShadow: "0 16px 40px rgba(31, 94, 59, 0.08)",
+              border: "1px solid rgba(42, 42, 42, 0.16)",
+              boxShadow: "0 16px 40px rgba(28, 59, 52, 0.08)",
             }}
           >
             <Section
@@ -44,11 +44,11 @@ export function EthnyEmailLayout({
                 marginBottom: "24px",
                 padding: "18px 20px",
                 borderRadius: "16px",
-                border: "1px solid #e3efd8",
-                background: "linear-gradient(135deg, #f8fcf4 0%, #ffffff 100%)",
+                border: "1px solid rgba(42, 42, 42, 0.14)",
+                background: "linear-gradient(135deg, #f1ece2 0%, #fffaf2 100%)",
               }}
             >
-              <Text style={{ margin: 0, fontSize: "12px", fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase", color: "#2f7a4f" }}>
+              <Text style={{ margin: 0, fontSize: "12px", fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase", color: "#2f5d50" }}>
                 Ethny
               </Text>
               <Heading
@@ -57,7 +57,7 @@ export function EthnyEmailLayout({
                   margin: "8px 0 0",
                   fontSize: "28px",
                   lineHeight: 1.2,
-                  color: "#173d29",
+                  color: "#23463c",
                 }}
               >
                 {title}

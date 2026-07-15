@@ -1,13 +1,19 @@
 import { render } from "@react-email/render";
 import { getEmailCampaign } from "@/lib/email-campaigns";
-import { getDefaultCampaignContent, type CampaignTemplateContent } from "@/lib/email-content";
+import {
+  getDefaultCampaignContent,
+  resolveCampaignContent,
+  type CampaignTemplateContent,
+} from "@/lib/email-content";
 import {
   resolveCampaignVariables,
   type CampaignVariables,
 } from "@/lib/email-variables";
+import type { CampaignId } from "@/lib/email-campaigns";
 
 export interface RenderedCampaign {
   html: string;
+  text: string;
   subject: string;
   previewText: string;
 }
@@ -24,12 +30,20 @@ export async function renderCampaignHtml(
   }
 
   const resolvedVariables = resolveCampaignVariables(variables);
-  const resolvedContent = content ?? getDefaultCampaignContent(campaignId);
-  const html = await render(campaign.component(resolvedVariables, resolvedContent));
+  const resolvedContent = resolveCampaignContent(
+    campaignId as CampaignId,
+    resolvedVariables,
+    content ?? getDefaultCampaignContent(campaignId as CampaignId),
+  );
+  const emailElement = campaign.component(resolvedVariables, resolvedContent);
+  const html = await render(emailElement);
+  const generatedText = await render(emailElement, { plainText: true });
+  const text = generatedText.trim() || resolvedContent.plainText;
 
   return {
     html,
-    subject: campaign.subject,
-    previewText: campaign.previewText,
+    text,
+    subject: resolvedContent.subject,
+    previewText: resolvedContent.previewText,
   };
 }

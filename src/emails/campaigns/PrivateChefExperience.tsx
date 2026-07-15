@@ -15,19 +15,16 @@ interface Props {
 export function PrivateChefExperience({ variables, content }: Props) {
   return (
     <EthnyEmailLayout previewText={content.previewText} title={content.title}>
-      <EmailHeader title={content.headerTitle} subtitle={content.headerSubtitle} />
+      <EmailHeader title={content.title} category={content.category} />
       <Section>
         <Text style={{ margin: "0 0 12px", fontSize: "16px", lineHeight: 1.6, color: "#2d3f35" }}>
-          {content.intro.replace("{firstName}", variables.firstName)}
-        </Text>
-        <Text style={{ margin: "0 0 12px", fontSize: "16px", lineHeight: 1.6, color: "#2d3f35" }}>
-          {content.body.split(". ")[0] + "."}
+          {content.intro}
         </Text>
         <Text style={{ margin: "0 0 20px", fontSize: "16px", lineHeight: 1.6, color: "#2d3f35" }}>
-          {content.body.split(". ")[1] ?? content.body}
+          {content.body}
         </Text>
-        <EthnyButton href={variables.bookingLink} label={content.ctaLabel} />
-        <EthnySignature />
+        <EthnyButton href={content.ctaUrl} label={content.ctaLabel} />
+        <EthnySignature name={content.signature} />
       </Section>
       <EmailFooter unsubscribeLink={variables.unsubscribeLink} />
     </EthnyEmailLayout>
