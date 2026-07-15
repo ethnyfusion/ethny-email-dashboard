@@ -14,7 +14,9 @@ const alegreya = Alegreya({
 
 const alegreyaSans = Alegreya_Sans({
   variable: "--font-body",
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
